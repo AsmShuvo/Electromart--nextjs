@@ -7,3 +7,11 @@ export const signUp = async (user) => {
 
   return result;
 };
+
+export const login = async (data) => {
+  const result = await httpAxios
+    .post("/api/login", data)
+    .then((res) => res.data);
+
+  return result;
+};

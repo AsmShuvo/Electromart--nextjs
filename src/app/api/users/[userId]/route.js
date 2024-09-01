@@ -40,8 +40,7 @@ export async function PUT(request, { params }) {
     user.name = name;
     user.about = about;
     user.password = password;
-    user.profileURL = profileURL;
-    // add more informationss
+    user.profileURL = profileURL; 
 
     const updatedUser = await user.save();
     return NextResponse.json(updatedUser);

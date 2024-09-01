@@ -1,56 +1,42 @@
 "use client"
 
-import { signUp } from "@/service/user.service";
 import Swal from "sweetalert2";
+import Link from "next/link";
+import { login } from "@/service/user.service";
 
-const SignUp = () => {
+const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
-        const username = form.username.value;
         const password = form.password.value;
         const user = {
-            email, username, password
+            email, password
         }
         try {
-            const result = await signUp(user);
+            const result = await login(user);
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Registration successful",
+                title: "Logged in successfully",
                 showConfirmButton: false,
                 timer: 1500
             });
             form.reset();
         } catch (error) {
-            console.log("Registration failed: ", error)
+            console.log("Login failed: ", error)
             Swal.fire({
                 icon: "error",
-                text: "Registration failed",
+                text: "Login failed",
             });
         }
     }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
+                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
                 <form onSubmit={handleSubmit}>
-                    {/* Username */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                            Username
-                        </label>
-                        <input
-                            type="text"
-                            id="username"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1DED81]"
-                            placeholder="Enter your username"
-                            name="username"
-                            required
-                        />
-                    </div>
-
                     {/* Email */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -87,8 +73,15 @@ const SignUp = () => {
                             type="submit"
                             className="w-full bg-[#1DED81] text-white py-2 px-4 rounded-md hover:bg-[#16b564] transition duration-200 ease-in-out"
                         >
-                            Sign Up
+                            Login
                         </button>
+                    </div>
+
+                    {/* Register Link */}
+                    <div className="text-center mt-4">
+                        <Link href="/register" className="text-blue-500 hover:underline">
+                            Don't have an account? Sign Up
+                        </Link>
                     </div>
                 </form>
             </div>
@@ -96,4 +89,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Login;
