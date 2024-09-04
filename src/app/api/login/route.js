@@ -33,7 +33,7 @@ export const POST = async (request) => {
       message: "Login Success",
       success: true,
     });
-    response.cookies.set("loginToken", token, {
+    response.cookies.set("authToken", token, {
       expiresIn: "24h",
       httpOnly: true,
     });

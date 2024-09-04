@@ -2,9 +2,13 @@
 
 import Swal from "sweetalert2";
 import Link from "next/link";
+import { useRouter } from "next/navigation"
 import { login } from "@/service/user.service";
 
 const Login = () => {
+
+    const router = useRouter();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -22,7 +26,9 @@ const Login = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            console.log("Login successful");
             form.reset();
+            router.push("/profile/user");
         } catch (error) {
             console.log("Login failed: ", error)
             Swal.fire({
